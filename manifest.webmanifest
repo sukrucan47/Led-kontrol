@@ -1,0 +1,10 @@
+{
+  "name":"LED Kontrol • ELK-BLEDOM",
+  "short_name":"LED Kontrol",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#07101d",
+  "theme_color":"#07101d",
+  "description":"ELK-BLEDOM LED kontrolü",
+  "icons":[{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

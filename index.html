@@ -1,0 +1,239 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><title>LED Kontrol • ELK-BLEDOM</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#070b12">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>
+:root{--bg:#070b12;--panel:#0d1523;--panel2:#111c2d;--line:#21314a;--txt:#f7f9ff;--muted:#91a1b9;--a:#24e4cf;--a2:#6d8cff;--danger:#ff5266;--warn:#ffb84d;--shadow:0 16px 44px #0009}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:radial-gradient(900px 500px at 50% -100px,#244878 0,#0b1220 48%,#05080e 100%);color:var(--txt);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}body{min-height:100vh;padding-bottom:92px}button,input{font:inherit}button{border:0;color:#fff;cursor:pointer}button:active{transform:scale(.98)}
+header{position:sticky;top:0;z-index:50;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:#07101de8;backdrop-filter:blur(20px);border-bottom:1px solid #ffffff12}.brand{text-align:center;font-weight:950;font-size:18px}.brand small{display:block;font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.12em;margin-top:2px}.headbtn{width:44px;height:44px;border-radius:15px;background:#16243a;font-size:21px}.status{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:999px;background:#101b2d;border:1px solid #273a57;font-size:10px;color:var(--muted);min-width:82px}.dot{width:8px;height:8px;border-radius:50%;background:#ff5266}.dot.on{background:#23e3b9;box-shadow:0 0 14px #23e3b9}.page{display:none;max-width:780px;margin:auto;padding:14px 12px 26px}.page.active{display:block}.card{background:linear-gradient(180deg,#111c2bf5,#0c1421f5);border:1px solid var(--line);border-radius:24px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}.hero{padding:12px}.row{display:flex;gap:9px;align-items:center}.between{justify-content:space-between}.grow{flex:1}.title{font-weight:900;font-size:15px}.muted{color:var(--muted)}.tiny{font-size:11px}.note{font-size:12px;color:var(--muted);line-height:1.45}.eyebrow{font-size:10px;color:var(--a);font-weight:950;letter-spacing:.12em;text-transform:uppercase}.btn{padding:12px 14px;border-radius:15px;background:#1a2a43;font-weight:850}.btn.primary{background:linear-gradient(135deg,#2be6d2,#18c8bd);color:#031512}.btn.red{background:linear-gradient(135deg,#e9435a,#a9233c)}.btn.full{width:100%}.input{width:100%;border:1px solid #253750;background:#08111e;color:#fff;border-radius:13px;padding:11px;outline:none}.warn{background:#2b2111;border:1px solid #5b4317;color:#ffd67a;border-radius:16px;padding:11px;font-size:12px;line-height:1.45}.hidden{display:none!important}
+/* color */
+.wheelShell{position:relative;width:min(88vw,400px);aspect-ratio:1;margin:2px auto 12px;filter:drop-shadow(0 18px 30px #0009)}#wheel{width:100%;height:100%;display:block;border-radius:50%;touch-action:none}.wheelGlow{position:absolute;inset:-2px;border-radius:50%;border:2px solid #fff3;pointer-events:none}.picker{position:absolute;width:30px;will-change:left,top,background;height:30px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 2px #07101c,0 0 18px #fff;transform:translate(-50%,-50%);pointer-events:none}.wheelHint{text-align:center;font-size:11px;color:#9eabc0;margin:0 0 12px}.rgb{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.rgbBox{background:#060c15;border:1px solid #1c2b42;border-radius:15px;padding:9px;text-align:center;font-weight:900}.rgbBox b{display:block;font-size:18px;margin-top:2px}.r{color:#ff5b58}.g{color:#48e97f}.b{color:#70a9ff}.slider{background:#091321;border:1px solid #20314b;border-radius:16px;padding:10px 12px;margin-top:9px}.slider label{display:flex;justify-content:space-between;color:#aebbd0;font-size:12px;margin-bottom:4px}.slider b{color:#fff}input[type=range]{width:100%;height:30px;accent-color:var(--a)}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.swatch{height:50px;border-radius:14px;border:2px solid #ffffff18;box-shadow:inset 0 0 0 1px #0006}.swatch:active{transform:scale(.94)}
+/* effects */
+.sectionHead{display:flex;justify-content:space-between;align-items:flex-end;margin:18px 3px 9px}.sectionHead h2{font-size:16px;margin:0}.sectionHead p{font-size:11px;color:var(--muted);margin:4px 0 0}.tag{font-size:9px;font-weight:900;color:#05120f;background:var(--a);padding:6px 8px;border-radius:999px}.fxGrid{display:grid;grid-template-columns:1fr;gap:9px}.fxCard{background:linear-gradient(145deg,#111d2f,#0b1421);border:1px solid #22344f;border-radius:18px;padding:10px}.fxCard.active{border-color:var(--a);box-shadow:0 0 0 1px #24e4cf55,0 10px 28px #24e4cf12}.fxBtn{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;background:transparent;padding:3px 2px 8px}.fxName{font-weight:900;font-size:14px}.fxUse{font-size:10px;color:var(--muted);margin-top:2px}.fxIcon{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;background:#172842;font-size:19px}.fxSpeed{border-top:1px solid #ffffff0b;padding-top:7px}.fxSpeed label{display:flex;justify-content:space-between;color:#93a2b9;font-size:10px}.fxSpeed b{color:#fff}.stopBox{position:sticky;bottom:88px;z-index:10;padding:4px 0 8px;background:linear-gradient(180deg,#070b1200,#070b12f5 45%)}.stop{width:100%;padding:15px;border-radius:17px;background:linear-gradient(135deg,#ef4057,#a71f39);font-weight:950;box-shadow:0 10px 26px #0008}.activeBar{background:#07151a;border:1px solid #1f5a52;border-radius:16px;padding:11px;margin-bottom:12px;color:#bafcf2;font-size:12px}.activeBar b{color:#fff}.audioGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.audioBtn{padding:13px 9px;border-radius:15px;background:#162640;border:1px solid #223854;text-align:left}.audioBtn.active{background:#123f3a;border-color:var(--a);box-shadow:0 0 0 1px #24e4cf44}.audioBtn strong{display:block}.audioBtn small{color:var(--muted)}
+/* bottom */
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:60;display:grid;grid-template-columns:repeat(4,1fr);padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:#07101def;backdrop-filter:blur(22px);border-top:1px solid #ffffff12}.tab{background:transparent;color:#8190a7;padding:7px 2px;border-radius:14px;font-size:10px;font-weight:850}.tab span{display:block;font-size:20px;line-height:22px;filter:grayscale(1)}.tab.active{color:var(--a);background:#10202d}.tab.active span{filter:none}
+@media(min-width:650px){.fxGrid{grid-template-columns:repeat(2,1fr)}.quick{grid-template-columns:repeat(8,1fr)}}
+
+/* ===== ANIMASYONLU / SADE ARAYÜZ V4 ===== */
+:root{--c1:36,228,207;--c2:109,140,255}
+html,body{overflow-x:hidden}
+body{background:#070b13;position:relative}
+body::before,body::after{content:"";position:fixed;z-index:-2;pointer-events:none;border-radius:50%;filter:blur(70px);opacity:.30;mix-blend-mode:screen}
+body::before{width:62vw;height:62vw;max-width:520px;max-height:520px;left:-18vw;top:10vh;background:radial-gradient(circle,rgba(var(--c1),.72),transparent 68%);animation:orbA 14s ease-in-out infinite alternate}
+body::after{width:70vw;height:70vw;max-width:600px;max-height:600px;right:-24vw;bottom:8vh;background:radial-gradient(circle,rgba(var(--c2),.62),transparent 68%);animation:orbB 18s ease-in-out infinite alternate}
+@keyframes orbA{0%{transform:translate3d(0,0,0) scale(.9)}100%{transform:translate3d(18vw,10vh,0) scale(1.18)}}
+@keyframes orbB{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(-16vw,-12vh,0) scale(.84)}}
+header{height:66px;background:rgba(7,13,24,.78);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 10px 35px rgba(0,0,0,.28)}
+.brand{font-size:17px;letter-spacing:-.02em}.brandMark{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:3px;border-radius:7px;color:#071514;background:linear-gradient(135deg,#2be6d2,#6d8cff);font-size:12px;box-shadow:0 0 18px rgba(36,228,207,.25);animation:brandGlow 2.6s ease-in-out infinite}@keyframes brandGlow{50%{transform:rotate(8deg) scale(1.06);box-shadow:0 0 26px rgba(36,228,207,.42)}}.brand small{opacity:.75}
+.headbtn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);box-shadow:inset 0 1px rgba(255,255,255,.05)}
+.status{min-width:auto;background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.09)}
+.page{padding:12px 10px 28px;animation:pageIn .32s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+.card{background:linear-gradient(145deg,rgba(18,29,47,.86),rgba(8,15,27,.91));border-color:rgba(150,180,220,.13);box-shadow:0 18px 45px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.035);backdrop-filter:blur(18px)}
+.card,.fxCard,.audioBtn,.slider,.rgbBox{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.card:active{transform:translateY(1px)}
+.eyebrow{font-size:9px;opacity:.85}.title{letter-spacing:-.01em}
+.wheelShell{width:min(82vw,350px);margin:0 auto 10px;filter:drop-shadow(0 22px 42px rgba(0,0,0,.45))}
+.wheelGlow{border:2px solid rgba(255,255,255,.12);box-shadow:0 0 45px rgba(var(--c1),.13);animation:wheelPulse 3.5s ease-in-out infinite}
+@keyframes wheelPulse{0%,100%{opacity:.65;transform:scale(.995)}50%{opacity:1;transform:scale(1.008)}}
+.picker{width:26px;height:26px;border-width:3px;transition:left .06s linear,top .06s linear,background .08s linear;animation:pickerPulse 1.5s ease-in-out infinite}
+@keyframes pickerPulse{0%,100%{box-shadow:0 0 0 2px #07101c,0 0 12px rgba(255,255,255,.65)}50%{box-shadow:0 0 0 3px #07101c,0 0 24px rgba(255,255,255,.95)}}
+.wheelHint{font-size:10px;opacity:.75}
+.rgb{gap:7px}.rgbBox{padding:8px;border-radius:13px;background:rgba(4,10,19,.65)}.rgbBox b{font-size:16px}
+.slider{padding:9px 11px;background:rgba(7,15,27,.62);border-color:rgba(255,255,255,.09)}
+input[type=range]{height:27px}
+.quick{gap:7px}.swatch{height:44px;border-radius:12px}
+.btn{min-height:44px;background:rgba(30,48,75,.78);border:1px solid rgba(255,255,255,.07);box-shadow:0 8px 18px rgba(0,0,0,.14)}
+.btn.primary{box-shadow:0 9px 24px rgba(36,228,207,.16)}.btn.red{box-shadow:0 9px 24px rgba(239,64,87,.15)}
+/* Effects: compact, visual and easy to scan */
+.sectionHead{margin:15px 2px 8px;padding:0 2px}.sectionHead h2{font-size:14px}.sectionHead p{font-size:10px}.tag{padding:5px 7px}
+.fxGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.fxCard{padding:8px;border-radius:16px;background:linear-gradient(145deg,rgba(17,29,47,.9),rgba(8,16,28,.9));border-color:rgba(150,180,220,.12)}
+.fxCard.active{border-color:rgba(36,228,207,.8);box-shadow:0 0 0 1px rgba(36,228,207,.25),0 10px 28px rgba(36,228,207,.10);animation:activeCard .8s ease-out}
+@keyframes activeCard{0%{transform:scale(.97)}100%{transform:scale(1)}}
+.fxBtn{padding:1px 1px 7px;min-height:50px}.fxName{font-size:12px;line-height:1.18}.fxUse{font-size:9px;line-height:1.25;display:block;margin-top:3px}.fxIcon{width:34px;height:34px;min-width:34px;border-radius:11px;background:rgba(35,55,84,.75);font-size:15px}
+.fxCard.active .fxIcon{background:rgba(36,228,207,.16);animation:playPulse 1.1s ease-in-out infinite}.fxCard.active .fxIcon{font-size:0}.fxCard.active .fxIcon::after{content:'●';font-size:11px;color:#5ff5df}
+@keyframes playPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.fxSpeed{padding-top:5px}.fxSpeed label{font-size:9px}.fxSpeed input{height:23px}
+.stopBox{bottom:78px;padding:5px 0 8px}.stop{padding:13px;border-radius:15px;font-size:12px}
+.activeBar{padding:9px 11px;border-radius:14px;background:rgba(5,25,27,.72)}
+.audioGrid{gap:7px}.audioBtn{padding:11px 9px;border-radius:14px;background:rgba(22,38,64,.76)}
+.bottom{grid-template-columns:repeat(4,1fr);padding:6px 7px calc(6px + env(safe-area-inset-bottom));background:rgba(7,13,24,.86);box-shadow:0 -10px 30px rgba(0,0,0,.2)}
+.tab{padding:7px 2px;font-size:10px}.tab span{font-size:19px}.tab.active{background:rgba(36,228,207,.08);box-shadow:inset 0 0 0 1px rgba(36,228,207,.08)}
+.warn{backdrop-filter:blur(10px)}
+/* small animated live strip */
+.hero::before{content:"";display:block;width:100%;height:3px;border-radius:99px;margin:0 0 12px;background:linear-gradient(90deg,rgba(var(--c1),0),rgba(var(--c1),.9),rgba(var(--c2),.8),rgba(var(--c1),0));background-size:200% 100%;animation:flowLine 3s linear infinite}
+@keyframes flowLine{to{background-position:200% 0}}
+@media(max-width:390px){.fxGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.fxCard{padding:7px}.fxName{font-size:11px}.fxUse{font-size:8px}.fxIcon{width:31px;height:31px;min-width:31px}.wheelShell{width:min(78vw,320px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+</style></head><body>
+<header><button class="headbtn" id="menu" aria-label="Menü">☰</button><div class="brand"><span class="brandMark">✦</span> LED Kontrol<small>ELK-BLEDOM • PRO</small></div><div class="status"><i class="dot" id="dot"></i><span id="btText">BLE</span></div></header>
+<main>
+<section id="kontrol" class="page active">
+<div class="warn hidden" id="secureWarn"></div>
+<div class="card hero"><div class="eyebrow">Renk stüdyosu</div><div class="wheelShell"><canvas id="wheel"></canvas><div class="wheelGlow"></div><div id="picker" class="picker"></div></div><div class="wheelHint">Parmağını basılı tut ve tekerlekte gezdir — imlecin olduğu renk seçilir.</div><div class="rgb"><div class="rgbBox"><span class="r">R</span><b id="rv">255</b></div><div class="rgbBox"><span class="g">G</span><b id="gv">0</b></div><div class="rgbBox"><span class="b">B</span><b id="bv">0</b></div></div>
+<div class="slider"><label><span>Parlaklık</span><b id="brightV">100%</b></label><input id="bright" type="range" min="0" max="100" value="100"></div><div class="slider"><label><span>Doygunluk</span><b id="satV">100%</b></label><input id="sat" type="range" min="0" max="100" value="100"></div><div class="row" style="margin-top:10px"><button class="btn primary grow" id="on">💡 AÇ</button><button class="btn red grow" id="off">⏹ KAPAT</button></div></div>
+<div class="card"><div class="row between"><div><div class="title">Hızlı renkler</div><div class="tiny muted">Doğrudan RGB gönderir</div></div><button class="btn" id="random">🎲</button></div><div id="colors" class="quick"></div></div>
+<div class="card"><div class="title">Bluetooth</div><div class="note" style="margin-top:5px">ELK-BLEDOM'a bağlan, sonra renk ve efektleri kontrol et.</div><div class="row" style="margin-top:10px"><button class="btn primary grow" id="connect">🔵 Cihazı Bul</button><button class="btn grow" id="auto">↻ Otomatik</button></div><button class="btn red full" style="margin-top:8px" id="disconnect">Bağlantıyı Kes</button><div class="note" id="statusText" style="margin-top:8px">Bağlı değil</div></div>
+</section>
+<section id="efekt" class="page"><div class="card" style="padding:10px 12px"><div class="row between"><div><div class="eyebrow">Hızlı kullanım</div><div class="note">Bir karta dokun: sadece o efekt çalışır. Hızı kartın altından ayarla.</div></div><span style="font-size:22px;animation:playPulse 1.4s infinite">✨</span></div></div>
+<div class="activeBar">Aktif: <b id="activeLabel">Efekt yok</b><span id="activeSpeedText"></span></div>
+<div class="stopBox"><button class="stop" id="stop">⛔ TÜM EFEKTLERİ DURDUR</button></div>
+<div class="sectionHead"><div><h2>🌈 Renk & Akış</h2><p>Geçiş, atmosfer ve dekoratif kullanım</p></div><span class="tag">ORTAM</span></div><div id="fx-color" class="fxGrid"></div>
+<div class="sectionHead"><div><h2>🔥 Sakin & Atmosfer</h2><p>Şömine, mum, gece ve göz rahatlığı</p></div><span class="tag">RAHAT</span></div><div id="fx-calm" class="fxGrid"></div>
+<div class="sectionHead"><div><h2>🚨 Uyarı & Acil</h2><p>Uyarı, ikaz ve görünürlük desenleri</p></div><span class="tag">UYARI</span></div><div id="fx-warning" class="fxGrid"></div>
+<div class="sectionHead"><div><h2>🚔 Polis</h2><p>Kırmızı / mavi ve acil araç tarzı desenler</p></div><span class="tag">ACİL</span></div><div id="fx-police" class="fxGrid"></div>
+</section>
+<section id="muzik" class="page"><div class="card" id="ytMusicCard"><div class="eyebrow">Müzik kaynağı</div><div class="title" style="margin-top:4px">🎵 YouTube Music • Ritim Senkron</div><p class="note">YouTube Music'i ayrı sekmede açıp, Chrome destekliyorsa o sekmenin sesini yakalayarak LED renklerini ritme göre değiştirebilirsin.</p><div class="row" style="margin-top:10px"><button class="btn primary grow" id="ytOpen">▶️ YouTube Music</button><button class="btn grow" id="ytCapture">🎧 Sekme Sesini Yakala</button></div><div class="note" id="ytDiag" style="margin-top:8px">YouTube Music: hazır değil</div><div class="slider"><label><span>Ritim hassasiyeti</span><b id="ytSensV">60%</b></label><input id="ytSens" type="range" min="1" max="100" value="60"></div><div class="slider"><label><span>Renk geçişi</span><b id="ytColorV">60%</b></label><input id="ytColor" type="range" min="1" max="100" value="60"></div></div><div class="card"><div class="eyebrow">Ses kontrolü</div><div class="title" style="margin-top:4px">🎙️ Mikrofon Senkron</div><p class="note">Mikrofon, Chrome izin verirse gerçek zamanlı ses seviyesine göre LED'i sürer.</p><div class="row"><button class="btn primary grow" id="mic">🎙️ Mikrofonu Başlat</button><button class="btn red" id="micStop">Durdur</button></div><div class="note" id="micDiag" style="margin-top:8px">Kontrol ediliyor…</div><div class="slider"><label><span>Hassasiyet</span><b id="sensV">50%</b></label><input id="sens" type="range" min="1" max="100" value="50"></div><div class="slider"><label><span>Renk hızı</span><b id="audioSpeedV">50%</b></label><input id="audioSpeed" type="range" min="1" max="100" value="50"></div><div id="audio" class="note" style="margin-top:8px">Kapalı</div></div><div class="card"><div class="title">🎵 Mod seç</div><div class="audioGrid"><button class="audioBtn" data-audio="spectrum"><strong>🌈 Spectrum</strong><small>Tüm frekanslar</small></button><button class="audioBtn" data-audio="beat"><strong>🥁 Beat</strong><small>Vuruş odaklı</small></button><button class="audioBtn" data-audio="bass"><strong>🔊 Bass Pulse</strong><small>Baslara tepki</small></button><button class="audioBtn" data-audio="party"><strong>🎉 Party</strong><small>Enerjik</small></button><button class="audioBtn" data-audio="energy"><strong>⚡ Energy</strong><small>Genel enerji</small></button><button class="audioBtn" data-audio="vocal"><strong>🎤 Vocal</strong><small>Orta frekans</small></button></div></div></section>
+<section id="ayar" class="page"><div class="card"><div class="eyebrow">Cihaz</div><div class="title">⚙️ ELK-BLEDOM bağlantısı</div><div class="row" style="margin-top:10px"><button class="btn primary grow" id="connect2">🔵 Bağlan</button><button class="btn red grow" id="disconnect2">Kes</button></div><div class="slider"><label><span>Aktif kanal</span><b id="svc">FFF0 / FFF3</b></label></div><div class="note">Profil: FFF0/FFF3, FFE5/FFE9 yedek kanal.</div></div><div class="card"><div class="title">💾 Renk hafızası</div><div class="row" style="margin-top:10px"><input id="presetName" class="input grow" placeholder="Örn. Gece mavisi"><button class="btn primary" id="saveColor">Kaydet</button></div><div id="savedColors" class="quick"></div></div><div class="card"><div class="title">📋 Durum</div><pre id="log" style="white-space:pre-wrap;color:#8fa1bb;font-size:10px;max-height:190px;overflow:auto"></pre></div></section>
+</main>
+<nav class="bottom"><button class="tab active" data-tab="kontrol"><span>🎨</span>Kontrol</button><button class="tab" data-tab="efekt"><span>✨</span>Efektler</button><button class="tab" data-tab="muzik"><span>🎙️</span>Müzik</button><button class="tab" data-tab="ayar"><span>⚙️</span>Ayar</button></nav>
+<script>
+const $=id=>document.getElementById(id);
+let rgb=[255,0,0],device=null,gatt=null,chr=null,connected=false,fxFrame=0,micFrame=0,runToken=0,activeFx=null,colorLatest=null,colorBusy=false,colorSeq=0,wheelDown=false,wheelPointer=null,audioCtx=null,analyser=null,stream=null,captureStream=null,captureVideo=null,lastBleWrite=0,saveTimer=0,bleMinInterval=55;
+const clamp=(v,a=0,b=255)=>Math.max(a,Math.min(b,Number(v)||0));
+function log(s){$('log').textContent=new Date().toLocaleTimeString()+'  '+s+'\n'+$('log').textContent}
+function stat(s,on=false){$('statusText').textContent=s;$('dot').classList.toggle('on',on);$('btText').textContent=on?'BAĞLI':'BLE'}
+function openTab(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));scrollTo(0,0)}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>openTab(b.dataset.tab));$('menu').onclick=()=>openTab('kontrol');
+function hsl(h,s,l){h=((h%360)+360)%360;s/=100;l/=100;const c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2;let r=0,g=0,b=0;if(h<60)[r,g,b]=[c,x,0];else if(h<120)[r,g,b]=[x,c,0];else if(h<180)[r,g,b]=[0,c,x];else if(h<240)[r,g,b]=[0,x,c];else if(h<300)[r,g,b]=[x,0,c];else[r,g,b]=[c,0,x];return [r+m,g+m,b+m].map(v=>Math.round(v*255))}
+function rgbToHsv(c){const r=clamp(c[0])/255,g=clamp(c[1])/255,b=clamp(c[2])/255,m=Math.max(r,g,b),n=Math.min(r,g,b),d=m-n;let h=0;if(d){if(m===r)h=60*((g-b)/d%6);else if(m===g)h=60*((b-r)/d+2);else h=60*((r-g)/d+4);if(h<0)h+=360}return[h,d?d/m*100:0,m*100]}
+function hsv(h,s,v){h=((Number(h)%360)+360)%360;s=clamp(s,0,100)/100;v=clamp(v,0,100)/100;const c=v*s,x=c*(1-Math.abs((h/60)%2-1)),m=v-c;let r=0,g=0,b=0;if(h<60)[r,g,b]=[c,x,0];else if(h<120)[r,g,b]=[x,c,0];else if(h<180)[r,g,b]=[0,c,x];else if(h<240)[r,g,b]=[0,x,c];else if(h<300)[r,g,b]=[x,0,c];else[r,g,b]=[c,0,x];return[r+m,g+m,b+m].map(v=>Math.round(v*255))}
+function displayRGB(){rgb=rgb.map(v=>Math.round(clamp(v)));$('rv').textContent=rgb[0];$('gv').textContent=rgb[1];$('bv').textContent=rgb[2];positionPicker();if(saveTimer)clearTimeout(saveTimer);saveTimer=setTimeout(()=>{try{localStorage.setItem('elk_rgb_pro',JSON.stringify(rgb))}catch(_){}},350)}
+function setRGB(c,send=true,token=runToken){if(token!==runToken)return;rgb=[clamp(c[0]),clamp(c[1]),clamp(c[2])].map(Math.round);document.documentElement.style.setProperty('--c1',rgb.join(','));document.documentElement.style.setProperty('--c2',[rgb[2],rgb[0],rgb[1]].join(','));displayRGB();if(send)queueColor()}
+function queueColor(){if(!connected||!chr)return;colorLatest={c:rgb.map(v=>Math.round(v*(+$('bright').value/100))),seq:++colorSeq};if(!colorBusy)pumpColor()}
+async function pumpColor(){if(colorBusy||!colorLatest||!connected||!chr)return;colorBusy=true;const wait=Math.max(0,bleMinInterval-(performance.now()-lastBleWrite));if(wait)await new Promise(r=>setTimeout(r,wait));if(!connected||!chr){colorBusy=false;return}const item=colorLatest;colorLatest=null;try{const ok=await writeFrame(item.c);if(ok)lastBleWrite=performance.now()}catch(_){}colorBusy=false;if(colorLatest&&connected)queueMicrotask(pumpColor)}
+async function writeFrame(c){return write(new Uint8Array([0x7e,0x07,0x05,0x03,clamp(c[0]),clamp(c[1]),clamp(c[2]),0x0a,0xef]))}
+async function write(data){if(!chr||!connected)return false;try{if(chr.properties?.writeWithoutResponse&&chr.writeValueWithoutResponse){await chr.writeValueWithoutResponse(data);return true}if(chr.writeValue){await chr.writeValue(data);return true}return false}catch(e){log('BLE: '+e.message);return false}}
+function drawWheel(){const c=$('wheel'),d=Math.min(devicePixelRatio||1,2),css=c.clientWidth||360;c.width=Math.max(1,Math.floor(css*d));c.height=Math.max(1,Math.floor(css*d));const x=c.getContext('2d'),w=c.width,h=c.height,cx=w/2,cy=h/2,R=Math.min(w,h)/2-2,img=x.createImageData(w,h),p=img.data;for(let y=0;y<h;y++)for(let xx=0;xx<w;xx++){const dx=xx-cx,dy=y-cy,dist=Math.hypot(dx,dy),i=(y*w+xx)*4;if(dist>R){p[i+3]=0;continue}const hue=(Math.atan2(dy,dx)*180/Math.PI+360)%360,sat=dist/R,col=hsv(hue,sat*100,100);p[i]=col[0];p[i+1]=col[1];p[i+2]=col[2];p[i+3]=255}x.putImageData(img,0,0)}
+function positionPicker(){const c=$('wheel'),r=c.getBoundingClientRect(),[h,s]=rgbToHsv(rgb),R=Math.min(r.width,r.height)/2-2,rad=s/100*R,a=h*Math.PI/180;$('picker').style.left=(r.width/2+Math.cos(a)*rad)+'px';$('picker').style.top=(r.height/2+Math.sin(a)*rad)+'px';$('picker').style.background='rgb('+rgb.join(',')+')'}
+function pick(e){const c=$('wheel'),r=c.getBoundingClientRect();let x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2,R=Math.min(r.width,r.height)/2-2,dist=Math.hypot(x,y);if(!Number.isFinite(dist)||R<=0)return;if(dist>R){const k=R/dist;x*=k;y*=k;dist=R}const hue=(Math.atan2(y,x)*180/Math.PI+360)%360,sat=dist/R;setRGB(hsv(hue,sat*100,100),true)}
+const wheelEl=$('wheel');wheelEl.addEventListener('contextmenu',e=>e.preventDefault());wheelEl.addEventListener('pointerdown',e=>{e.preventDefault();wheelDown=true;wheelPointer=e.pointerId;try{wheelEl.setPointerCapture(e.pointerId)}catch(_){}pick(e)});wheelEl.addEventListener('pointermove',e=>{if(wheelDown&&e.pointerId===wheelPointer){e.preventDefault();const pts=e.getCoalescedEvents?e.getCoalescedEvents():[e];for(const pt of pts)pick(pt)}});['pointerup','pointercancel','lostpointercapture'].forEach(ev=>wheelEl.addEventListener(ev,()=>{wheelDown=false;wheelPointer=null}));addEventListener('resize',()=>{drawWheel();positionPicker()});
+$('bright').oninput=()=>{$('brightV').textContent=$('bright').value+'%';queueColor()};$('sat').oninput=()=>{$('satV').textContent=$('sat').value+'%';const [h,,v]=rgbToHsv(rgb);setRGB(hsv(h,+$('sat').value,v),true)};$('sens').oninput=()=>{$('sensV').textContent=$('sens').value+'%'};$('audioSpeed').oninput=()=>{$('audioSpeedV').textContent=$('audioSpeed').value+'%'};
+async function power(on){stopAll(false);if(!connected)return;await write(new Uint8Array(on?[0x7e,0x07,0x04,0xff,0,1,2,1,0xef]:[0x7e,0x07,0x04,0,0,0,0xff,0,0xef]))}
+$('on').onclick=()=>power(true);$('off').onclick=()=>power(false);
+async function connectD(d){try{stopAll(false);device=d;if(!device._elk){device.addEventListener('gattserverdisconnected',()=>{connected=false;chr=null;stat('Bağlantı kesildi');activeFx=null;stopAll(false)});device._elk=true}stat('Bağlanıyor…');gatt=await d.gatt.connect();const pairs=[['0000fff0-0000-1000-8000-00805f9b34fb','0000fff3-0000-1000-8000-00805f9b34fb'],['0000ffe5-0000-1000-8000-00805f9b34fb','0000ffe9-0000-1000-8000-00805f9b34fb']];let found=false;for(const [s,c] of pairs){try{const svc=await gatt.getPrimaryService(s),cc=await svc.getCharacteristic(c);if(cc.properties.write||cc.properties.writeWithoutResponse){chr=cc;found=true;$('svc').textContent=s+' / '+c;break}}catch(_){} }if(!found)throw Error('Yazılabilir ELK-BLEDOM kanalı bulunamadı');connected=true;stat(d.name||'ELK-BLEDOM',true);log('Bağlandı');await power(true);queueColor()}catch(e){connected=false;chr=null;stat('Bağlanamadı');log('HATA: '+e.message);alert(e.message)}}
+$('connect').onclick=async()=>{try{if(!navigator.bluetooth)throw Error('Bu Chrome sürümünde Web Bluetooth yok.');const d=await navigator.bluetooth.requestDevice({filters:[{namePrefix:'ELK-BLEDOM'}],optionalServices:['0000fff0-0000-1000-8000-00805f9b34fb','0000ffe5-0000-1000-8000-00805f9b34fb']});await connectD(d)}catch(e){log('HATA: '+e.message);alert(e.message)}};$('connect2').onclick=()=>$('connect').click();$('auto').onclick=async()=>{try{const ds=await navigator.bluetooth?.getDevices?.()||[],d=ds.find(x=>(x.name||'').startsWith('ELK-BLEDOM'));if(!d)throw Error('Önce Cihazı Bul ile izin ver.');await connectD(d)}catch(e){alert(e.message)}};$('disconnect').onclick=()=>{stopAll(false);device?.gatt?.connected&&device.gatt.disconnect();connected=false;chr=null;stat('Bağlı değil')};$('disconnect2').onclick=()=>$('disconnect').click();
+function hex(s){const t=String(s).replace('#','').trim();return t.length===3?[...t].map(x=>parseInt(x+x,16)):[parseInt(t.slice(0,2),16),parseInt(t.slice(2,4),16),parseInt(t.slice(4,6),16)]}
+const colors=[['#ff0000','Kırmızı'],['#00ff00','Yeşil'],['#0000ff','Mavi'],['#00ffff','Cyan'],['#ffff00','Sarı'],['#ffffff','Beyaz'],['#ff00ff','Mor'],['#ff1493','Pembe'],['#ff7a00','Turuncu'],['#00aaff','Gök'],['#8a2be2','Eflatun'],['#40e0d0','Turkuaz'],['#7fff00','Lime'],['#ffa500','Amber'],['#7b61ff','Mor2'],['#ff4d8d','Pembe2']];colors.forEach(([c,n])=>{const b=document.createElement('button');b.className='swatch';b.style.background=c;b.title=n;b.setAttribute('aria-label',n);b.onclick=()=>setRGB(hex(c));$('colors').appendChild(b)});$('random').onclick=()=>setRGB([0,1,2].map(()=>Math.floor(Math.random()*256)));
+function clearFX(){document.querySelectorAll('.fxCard,.audioBtn').forEach(b=>b.classList.remove('active'));$('activeLabel').textContent='Efekt yok';$('activeSpeedText').textContent=''}
+function stopAll(logIt=true){runToken++;if(fxFrame){cancelAnimationFrame(fxFrame);fxFrame=0}if(micFrame){cancelAnimationFrame(micFrame);micFrame=0}if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}if(captureStream){captureStream.getTracks().forEach(t=>t.stop());captureStream=null}captureVideo=null;if(audioCtx){try{audioCtx.close()}catch(_){}audioCtx=null}analyser=null;activeFx=null;colorLatest=null;clearFX();$('audio').textContent='Kapalı';if(logIt)log('TÜM EFEKTLER DURDU')}$('stop').onclick=()=>stopAll(true);
+const patterns={police1:[[255,0,0],[255,0,0],[0,0,255],[0,0,255],[0,0,0]],police2:[[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,0]],police3:[[255,0,0],[255,0,0],[255,0,0],[0,0,255],[0,0,255],[0,0,255],[0,0,0]],police4:[[255,0,0],[255,255,255],[0,0,255],[0,0,0]],police5:[[255,0,0],[0,0,255],[255,0,0],[0,0,255],[0,0,0]],police6:[[255,0,0],[0,0,0],[0,0,255],[0,0,0]],police7:[[255,0,0],[0,0,0],[0,0,255],[0,0,0],[255,0,0],[0,0,255]],police8:[[255,0,0],[255,255,255],[255,0,0],[0,0,255],[255,255,255],[0,0,255]],redStrobe:[[255,0,0],[0,0,0]],blueStrobe:[[0,0,255],[0,0,0]],amber:[[255,90,0],[255,90,0],[0,0,0]],hazard:[[255,180,0],[0,0,0]],rescue:[[255,0,0],[255,255,255],[0,0,0]],warning:[[255,180,0],[255,255,255],[0,0,0]],alternating:[[255,0,0],[0,0,255]],triple:[[255,0,0],[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,255],[0,0,0]],slowEmergency:[[255,0,0],[0,0,0],[0,0,255],[0,0,0]],fastEmergency:[[255,0,0],[0,0,255],[255,0,0],[0,0,255]],crossflash:[[255,0,0],[255,255,255],[0,0,255],[255,255,255],[0,0,0]],warningFast:[[255,180,0],[255,255,0],[0,0,0]],double:[[255,255,255],[0,0,0],[255,255,255],[0,0,0]],heartbeat:[[255,0,40],[80,0,20],[255,0,40],[0,0,0]],flashRGB:[[255,0,0],[0,255,0],[0,0,255],[0,0,0]],flashAll:[[255,0,0],[255,120,0],[255,255,0],[0,255,0],[0,255,255],[0,70,255],[170,0,255],[0,0,0]],strobeW:[[255,255,255],[0,0,0]],traffic:[[255,0,0],[255,0,0],[255,180,0],[255,180,0],[0,255,0],[0,0,0]],construction:[[255,150,0],[0,0,0],[255,150,0],[255,255,0],[0,0,0]],railroad:[[255,0,0],[0,0,0],[255,0,0],[0,0,0],[255,255,255],[0,0,0]],tow:[[255,150,0],[255,255,255],[255,150,0],[0,0,0]],danger:[[255,0,0],[255,0,0],[0,0,0],[255,0,0],[0,0,0]],evacuation:[[255,140,0],[255,255,255],[255,140,0],[0,0,0]],beacon:[[255,130,0],[255,130,0],[0,0,0],[0,0,0]],lightning:[[255,255,255],[0,0,0],[255,255,255],[0,0,0],[0,0,0],[255,255,255],[0,0,0]],police9:[[255,0,0],[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,255],[0,0,0]],police10:[[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,0]],police11:[[255,0,0],[255,0,0],[0,0,255],[0,0,255],[0,0,0]],police12:[[255,0,0],[0,0,255],[255,0,0],[0,0,255],[0,0,0]],police13:[[255,0,0],[255,0,0],[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,255],[0,0,255],[0,0,0]],police14:[[255,0,0],[255,0,0],[0,0,0],[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,0],[0,0,255],[0,0,255],[0,0,0]],police15:[[255,0,0],[255,255,255],[255,0,0],[0,0,0],[0,0,255],[255,255,255],[0,0,255],[0,0,0]],police16:[[255,0,0],[255,0,0],[0,0,0],[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,0]],police17:[[255,0,0],[0,0,0],[255,0,0],[0,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,0],[0,0,255],[0,0,0],[0,0,255],[0,0,0]],police18:[[255,0,0],[255,0,0],[255,0,0],[0,0,0],[255,0,0],[255,0,0],[255,0,0],[0,0,0],[0,0,255],[0,0,255],[0,0,255],[0,0,0],[0,0,255],[0,0,255],[0,0,255],[0,0,0]]};
+const fxDefs={
+color:[['rainbow','🌈','Gökkuşağı','Renk geçişi • dekorasyon'],['colorFlow','🎨','Color Flow','Yumuşak renk akışı • ambiyans'],['fade','🌅','Fade','Yavaş parlaklık geçişi • oda'],['jump','🔀','Color Jump','Keskin renk değişimi • parti'],['rgb','🔴','RGB Cycle','RGB sıralı dönüş • araç/oda'],['disco','🪩','Disco','Rastgele hızlı renkler • parti'],['aurora','🌌','Aurora','Kuzey ışığı hissi • gece'],['sunset','🌇','Sunset','Gün batımı tonları • ambiyans'],['ocean','🌊','Ocean','Mavi/yeşil dalga • sakin'],['forest','🌲','Forest','Yeşil tonlar • doğa']],
+calm:[['fireplace','🔥','Şömine Ateşi','Titreşimli sıcak turuncu • salon'],['campfire','🏕️','Kamp Ateşi','Daha canlı ateş • kamp'],['candle','🕯️','Mum Işığı','Nazik sıcak titreşim • gece'],['eyeComfort','👁️','Göz Rahatlığı','Sıcak ve düşük ışık • uzun kullanım'],['moonlight','🌙','Ay Işığı','Soğuk, düşük ışık • gece'],['breathing','🫧','Sakin Nefes','Yavaş nefes ritmi • dinlenme']],
+warning:[['traffic','🚦','Trafik','Kırmızı/amber/yeşil • uyarı teması'],['construction','🚧','İnşaat','Amber flaş • dikkat'],['railroad','🚆','Demiryolu','Kırmızı/beyaz ikaz • görünürlük'],['tow','🟠','Çekici','Amber/beyaz • yol kenarı'],['danger','☢️','Tehlike','Kırmızı keskin flaş • dikkat'],['evacuation','🟠','Tahliye','Amber/beyaz • yönlendirme'],['beacon','🚨','Döner Sinyal','Amber döner uyarı hissi'],['lightning','⚡','Şimşek','Beyaz kısa çakmalar']],
+police:[['police1','🚔','Polis 1','Kırmızı/mavi • klasik'],['police2','🚔','Polis 2','Çift flaş • klasik'],['police3','🚨','Polis 3','3’lü seri • yoğun'],['police4','🚨','Polis 4','Kırmızı/beyaz/mavi'],['police5','🚓','Polis 5','Hızlı alternatif'],['police6','🚓','Polis 6','Yavaş alternatif'],['police7','🚔','Polis 7','Çapraz seri'],['police8','🚨','Polis 8','R/B hızlı'],['police9','🚨','Polis 9 • 3R + 3B','3 kırmızı + 3 mavi çakar'],['police10','🚨','Polis 10 • 2R + 2B','2 kırmızı + 2 mavi çakar'],['police11','🚨','Polis 11 • Çift Seri','Çift kırmızı + çift mavi'],['police12','🚨','Polis 12 • Hızlı R/B','Keskin hızlı alternatif'],['police13','🚨','Polis 13 • 4R + 4B','4 kırmızı + 4 mavi çakar'],['police14','🚨','Polis 14 • Bölümlü','2R + boşluk + 2R / 2B + boşluk + 2B'],['police15','🚨','Polis 15 • R/W/B','Kırmızı-beyaz-mavi hızlı seri'],['police16','🚨','Polis 16 • Çift Çift','Çiftli kırmızı ve mavi burst'],['police17','🚨','Polis 17 • Tekli','Tek tek kırmızı/mavi çakma'],['police18','🚨','Polis 18 • 3R3B Hızlı','Üçlü kırmızı + üçlü mavi hızlı'],['redStrobe','🔴','Kırmızı Strobe','Tek renk • dikkat'],['blueStrobe','🔵','Mavi Strobe','Tek renk • dikkat'],['amber','🟠','Amber Çift Flaş','Yol/uyarı'],['hazard','⚠️','Hazard','Sarı uyarı'],['rescue','🆘','Rescue','Kırmızı/beyaz'],['warning','⚠️','Warning','Sarı/beyaz'],['alternating','🔴','Alternating R/B','Keskin alternatif'],['triple','🚨','Triple Burst','3+3 seri'],['slowEmergency','🚨','Slow Emergency','Yavaş acil'],['fastEmergency','🚨','Fast Emergency','Hızlı acil'],['crossflash','🚨','Cross Flash','R/W/B çapraz'],['warningFast','⚠️','Warning Fast','Hızlı sarı'],['double','⚪','White Double','Çift beyaz flaş'],['heartbeat','❤️','Heartbeat','Kalp atışı ritmi'],['flashRGB','🌈','Flash RGB','Üç renk flaş'],['flashAll','🎆','Flash All','Tüm renkler'],['strobeW','⚪','White Strobe','Beyaz strobe']]
+};
+const effectSpeed={};Object.values(fxDefs).flat().forEach(d=>effectSpeed[d[0]]=60);
+function makeCards(){for(const [group,defs] of Object.entries(fxDefs)){const host=$('fx-'+group);defs.forEach(([id,icon,name,use])=>{const card=document.createElement('div');card.className='fxCard';card.dataset.fx=id;card.innerHTML='<button class="fxBtn"><span><span class="fxName">'+icon+' '+name+'</span><span class="fxUse">'+use+'</span></span><span class="fxIcon">▶</span></button><div class="fxSpeed"><label><span>Hız</span><b>60%</b></label><input type="range" min="1" max="100" value="60"></div>';const range=card.querySelector('input');range.oninput=()=>{effectSpeed[id]=+range.value;card.querySelector('b').textContent=range.value+'%';if(activeFx===id)$('activeSpeedText').textContent=' • '+range.value+'%'};card.querySelector('.fxBtn').onclick=()=>runFX(id,card);host.appendChild(card)})}}
+function lerp3(a,b,t){return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t]}
+function smoothstep(t){return t*t*(3-2*t)}
+function effectTarget(type,t){
+ if(type==='rainbow')return hsl((t*4)%360,100,50);
+ if(type==='colorFlow')return hsl((t*1.7)%360,100,45);
+ if(type==='fade')return hsl((t*1.2)%360,100,28+28*(Math.sin(t/14)+1)/2);
+ if(type==='jump')return [[255,0,0],[255,120,0],[255,255,0],[0,255,0],[0,255,255],[0,70,255],[170,0,255]][t%7];
+ if(type==='rgb')return [[255,0,0],[0,255,0],[0,0,255]][t%3];
+ if(type==='disco')return hsl(Math.random()*360,100,50);
+ if(type==='aurora')return hsl(160+Math.sin(t/9)*70,90,42);
+ if(type==='sunset')return [[255,70,10],[255,130,15],[230,30,70],[120,20,120]][t%4];
+ if(type==='ocean')return hsl(180+Math.sin(t/10)*35,100,43);
+ if(type==='forest')return hsl(110+Math.sin(t/8)*30,95,38);
+ if(type==='fireplace'||type==='campfire'){const r=190+Math.random()*65,g=35+Math.random()*105,b=Math.random()*16;return [r,g,b]}
+ if(type==='candle'){const k=.58+.42*Math.random();return [255,Math.round(115*k),Math.round(28*k)]}
+ if(type==='eyeComfort'){const k=.42+.12*(Math.sin(t/20)+1);return [255,Math.round(150*k),Math.round(55*k)]}
+ if(type==='moonlight'){const k=.32+.16*(Math.sin(t/25)+1);return [Math.round(90*k),Math.round(160*k),Math.round(255*k)]}
+ if(type==='breathing'){const k=.10+.58*(Math.sin(t/28)+1)/2;return [Math.round(255*k),Math.round(110*k),Math.round(35*k)]}
+ return patterns[type] ? patterns[type][t%patterns[type].length] : [255,0,0];
+}
+function runFX(type,card){
+ if(!connected||!chr){alert('Önce ELK-BLEDOM cihazına bağlan.');openTab('kontrol');return}
+ stopAll(false);
+ const token=runToken;activeFx=type;card.classList.add('active');
+ const name=card.querySelector('.fxName').textContent;$('activeLabel').textContent=name;$('activeSpeedText').textContent=' • '+effectSpeed[type]+'%';
+ let i=0,last=performance.now(),segmentStart=last,nextTargetAt=last,target=rgb.slice(),from=rgb.slice(),fxLastSend=0;
+ function tick(now){
+   if(token!==runToken||activeFx!==type||!connected||!chr)return;
+   const sp=effectSpeed[type],delay=Math.max(45,520-sp*4.7),hardStrobe=type.startsWith('police')||['redStrobe','blueStrobe','amber','hazard','rescue','warning','alternating','triple','fastEmergency','crossflash','warningFast','double','strobeW'].includes(type);
+   if(now>=nextTargetAt){
+     from=target.slice();target=effectTarget(type,i++).map(Number);segmentStart=now;nextTargetAt=now+delay;
+     if(hardStrobe){setRGB(target,false,token);if(now-fxLastSend>=bleMinInterval){queueColor();fxLastSend=now}}
+   }
+   if(!hardStrobe){
+     const raw=Math.max(0,Math.min(1,(now-segmentStart)/Math.max(1,delay)));
+     const eased=smoothstep(raw);
+     const c=lerp3(from,target,eased);
+     setRGB(c,false,token);if(now-fxLastSend>=bleMinInterval){queueColor();fxLastSend=now}
+   }
+   fxFrame=requestAnimationFrame(tick);
+ }
+ fxFrame=requestAnimationFrame(tick)
+}
+makeCards();
+async function micStart(mode){if(!connected||!chr){alert('Önce ELK-BLEDOM cihazına bağlan.');openTab('kontrol');return}stopAll(false);const token=runToken;if(!(window.isSecureContext&&navigator.mediaDevices?.getUserMedia)){const msg='⚠️ Mikrofon kullanılamıyor: Chrome bu dosyayı content:// olarak açıyor. Gerçek mikrofon için sayfayı HTTPS veya localhost üzerinden açmak gerekiyor.';$('audio').textContent=msg;$('micDiag').textContent=msg;log('Mikrofon: güvenli bağlam yok');return}try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});if(token!==runToken){stream.getTracks().forEach(t=>t.stop());return}audioCtx=new (window.AudioContext||window.webkitAudioContext)();await audioCtx.resume();const src=audioCtx.createMediaStreamSource(stream);analyser=audioCtx.createAnalyser();analyser.fftSize=1024;analyser.smoothingTimeConstant=.62;src.connect(analyser);$('audio').textContent='🎙️ '+mode+' aktif';const a=new Uint8Array(analyser.frequencyBinCount);let ph=0,last=0;function loop(now){if(token!==runToken||!analyser||!connected||!chr)return;if(now-last<24){micFrame=requestAnimationFrame(loop);return}last=now;analyser.getByteFrequencyData(a);let bass=0,mid=0,all=0;for(let i=0;i<12;i++)bass+=a[i];for(let i=12;i<80;i++)mid+=a[i];for(const v of a)all+=v;bass/=12;mid/=68;all/=a.length;const sens=+$('sens').value/50,spd=+$('audioSpeed').value/50;if(mode==='beat')setRGB(bass*sens>125?[255,0,0]:hsl((ph++*spd)%360,100,45),false,token);else if(mode==='bass')setRGB(rgb.map(v=>v*(.2+Math.min(1,bass*sens/150))),false,token);else if(mode==='party'){if(all*sens>95)setRGB(hsl(Math.random()*360,100,50),false,token)}else if(mode==='energy')setRGB(hsl((all*3+ph++*spd)%360,100,25+Math.min(35,all/4)),false,token);else if(mode==='vocal')setRGB(hsl((mid*3+ph++*spd)%360,100,35+Math.min(25,mid/4)),false,token);else setRGB(hsl((all*2.7+ph++*spd)%360,100,30+Math.min(30,all/3)),false,token);if(now-lastBleWrite>=bleMinInterval)queueColor();micFrame=requestAnimationFrame(loop)}micFrame=requestAnimationFrame(loop)}catch(e){$('audio').textContent='❌ '+e.message;log('Mikrofon: '+e.message)}}
+async function startYTMusicCapture(){
+ if(!connected||!chr){alert('Önce ELK-BLEDOM cihazına bağlan.');openTab('kontrol');return}
+ stopAll(false);
+ const token=runToken;
+ if(!(window.isSecureContext&&navigator.mediaDevices?.getDisplayMedia)){
+  const msg='⚠️ Sekme sesi yakalama bu Chrome bağlamında kullanılamıyor. HTTPS/localhost ile açıp tekrar dene.';
+  $('ytDiag').textContent=msg;log('YouTube Music: sekme sesi API yok/güvenli bağlam yok');return;
+ }
+ try{
+  captureStream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:true});
+  if(token!==runToken){captureStream.getTracks().forEach(t=>t.stop());captureStream=null;return}
+  const tracks=captureStream.getAudioTracks();
+  if(!tracks.length){captureStream.getTracks().forEach(t=>t.stop());captureStream=null;$('ytDiag').textContent='⚠️ Ses paylaşılmadı. Ekran/sekmeyi seçerken "Ses paylaş" seçeneğini aç.';return}
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();await audioCtx.resume();
+  analyser=audioCtx.createAnalyser();analyser.fftSize=1024;analyser.smoothingTimeConstant=.78;
+  const src=audioCtx.createMediaStreamSource(new MediaStream(tracks));src.connect(analyser);
+  captureVideo=captureStream.getVideoTracks()[0]||null;
+  if(captureVideo) captureVideo.addEventListener('ended',()=>{if(token===runToken)stopAll(true)},{once:true});
+  $('ytDiag').textContent='🎵 YouTube Music sesi yakalanıyor • ritim senkronu aktif';
+  $('audio').textContent='🎵 YouTube Music ritim modu aktif';
+  const a=new Uint8Array(analyser.frequencyBinCount);let hue=0,last=0,energySmooth=0,beat=0;
+  function loop(now){
+   if(token!==runToken||!analyser||!connected||!chr)return;
+   if(now-last<24){micFrame=requestAnimationFrame(loop);return}last=now;
+   analyser.getByteFrequencyData(a);
+   let bass=0,mid=0,treble=0,all=0;
+   for(let i=0;i<12;i++)bass+=a[i];
+   for(let i=12;i<80;i++)mid+=a[i];
+   for(let i=80;i<Math.min(180,a.length);i++)treble+=a[i];
+   for(const v of a)all+=v;
+   bass/=12;mid/=68;treble/=Math.max(1,Math.min(180,a.length)-80);all/=a.length;
+   const sens=+$('ytSens').value/60,spd=+$('ytColor').value/60;
+   const energy=(bass*.52+mid*.30+treble*.18)*sens;
+   energySmooth=energySmooth*.72+energy*.28;
+   const beatHit=energy>Math.max(65,energySmooth*1.28)&&bass>45;
+   if(beatHit)beat=Math.min(1,beat+.55);else beat*=.88;
+   hue=(hue+(0.7+spd*1.8)+beat*8)%360;
+   const v=22+Math.min(52,energySmooth*.38)+beat*22;
+   const sat=88+Math.min(12,treble*.08);
+   const col=hsv(hue,sat,Math.min(82,v));
+   setRGB(col,false,token);
+   if(now-lastBleWrite>=bleMinInterval) queueColor();
+   micFrame=requestAnimationFrame(loop);
+  }
+  micFrame=requestAnimationFrame(loop);
+ }catch(e){
+  if(captureStream){captureStream.getTracks().forEach(t=>t.stop());captureStream=null}
+  $('ytDiag').textContent='❌ '+(e.name==='NotAllowedError'?'İzin verilmedi veya paylaşım iptal edildi.':e.message);log('YouTube Music: '+e.message);
+ }
+}
+$('ytOpen').onclick=()=>window.open('https://music.youtube.com/','_blank','noopener,noreferrer');
+$('ytCapture').onclick=startYTMusicCapture;
+$('ytSens').oninput=()=>{$('ytSensV').textContent=$('ytSens').value+'%'};
+$('ytColor').oninput=()=>{$('ytColorV').textContent=$('ytColor').value+'%'};
+$('mic').onclick=()=>micStart('spectrum');$('micStop').onclick=()=>stopAll(true);document.querySelectorAll('.audioBtn').forEach(b=>b.onclick=()=>{stopAll(false);document.querySelectorAll('.audioBtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');micStart(b.dataset.audio)});
+$('saveColor').onclick=()=>{const n=$('presetName').value.trim()||'Renk';const a=JSON.parse(localStorage.getItem('elk_presets_ultra')||'[]');a.push({n,c:rgb});localStorage.setItem('elk_presets_ultra',JSON.stringify(a.slice(-16)));$('presetName').value='';renderPresets()};function renderPresets(){$('savedColors').innerHTML='';for(const p of JSON.parse(localStorage.getItem('elk_presets_ultra')||'[]')){const b=document.createElement('button');b.className='swatch';b.style.background='rgb('+p.c.join(',')+')';b.title=p.n;b.onclick=()=>setRGB(p.c);$('savedColors').appendChild(b)}}renderPresets();
+function updateMic(){const ok=!!(window.isSecureContext&&navigator.mediaDevices?.getUserMedia);$('micDiag').textContent=ok?'✅ Mikrofon API hazır. Başlatınca izin isteyebilir.':'❌ Bu dosya content:// olarak açılıyor. Chrome mikrofonu bu bağlamda vermez; HTTPS/localhost gerekir.';$('micDiag').style.color=ok?'#8ff0c9':'#ffd166'}updateMic();if(!window.isSecureContext){$('secureWarn').textContent='Chrome dosyayı content://downloads olarak açıyor. Bluetooth çalışsa bile mikrofon erişimi bu bağlamda engellenebilir. Mikrofon için HTTPS/localhost gerekir.';$('secureWarn').classList.remove('hidden')}
+let saved=null;try{saved=JSON.parse(localStorage.getItem('elk_rgb_pro')||'null')}catch(_){}setRGB(Array.isArray(saved)?saved:[255,0,0],false);drawWheel();positionPicker();
+</script><script>
+if ('serviceWorker' in navigator) { window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{})); }
+</script>
+</body></html>
